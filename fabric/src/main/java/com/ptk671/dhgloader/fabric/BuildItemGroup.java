@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 public class BuildItemGroup {
     public static ItemGroup build(DhgItemGroup itemGroup) {
         ItemGroup.Builder settings = FabricItemGroup.builder();
-        if (itemGroup.getDhgItemIcon() != null) settings.icon(() -> new ItemStack( itemGroup.getDhgItemIcon().getMcItem()));
+        //if (itemGroup.getDhgItemIcon() != null) settings.icon(() -> new ItemStack( itemGroup.getDhgItemIcon().getMcItem()));
         if (itemGroup.getItemIcon() != null) settings.icon(itemGroup.getItemIcon());
 
         settings.displayName(Text.translatable("itemGroup."+itemGroup.getId().getNamespace()+itemGroup.getId().getPath()));

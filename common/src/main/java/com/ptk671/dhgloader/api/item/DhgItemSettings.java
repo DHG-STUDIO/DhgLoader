@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public class DhgItemSettings {
     private int maxCount = 64;
     private ItemGroupWarpper itemGroup;
-    private Supplier<DhgItemGroup> dhgItemGroup;
+    private DhgItemGroup dhgItemGroup;
     private int maxDamage;
     private boolean maxDamage_boolen = false;
     private boolean maxDamageIfAbsent_boolen = false;
@@ -53,7 +53,7 @@ public class DhgItemSettings {
 
     public DhgItemSettings group(DhgItemGroup itemGroup)
     {
-        this.dhgItemGroup = () -> itemGroup;
+        this.dhgItemGroup = itemGroup;
         return this;
     }
 
@@ -78,9 +78,10 @@ public class DhgItemSettings {
         return itemGroup;
     }
 
-    public Supplier<DhgItemGroup> getDhgItemGroup(){
-
+    public DhgItemGroup getDhgItemGroup(){
         return dhgItemGroup;
     }
+
+
 
 }

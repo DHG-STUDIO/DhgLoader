@@ -1,6 +1,7 @@
 package com.ptk671.dhgloader.fabric;
 
 import com.ptk671.dhgloader.DhgLoader;
+import com.ptk671.dhgloader.api.item.AddGroupHelper;
 import com.ptk671.dhgloader.api.item.DhgItem;
 import com.ptk671.dhgloader.api.item.DhgItemGroup;
 import com.ptk671.dhgloader.api.item.ExtendVanilaItem;
@@ -24,40 +25,50 @@ public final class DhgLoaderFabric implements ModInitializer {
 
         // Run our common setup.
         DhgLoader.init();
+
         for (CompatDhgRegistry registry : DhgLoader.registries) {
+
 
             //Itemの登録
             for (RegistryHelper.Item item : registry.getItems()) {
-                Registry.register(Registries.ITEM, (item.getItemId().toMinecraft()), item.getItem().get().getMcItem());
 
-                if (item.getItem().get().getSettings().getDhgItemGroup().get() != null){
-                    item.getItem().get().getSettings().getDhgItemGroup().get().appendItems(item.getItem().get());
+                if (item.getItem().get().getSettings().getDhgItemGroup() != null){
+                DhgLoader.addGroupHelper.add(new AddGroupHelper(item.getItem().get()));
                 }
 
+                Registry.register(Registries.ITEM, (item.getItemId().toMinecraft()), item.getItem().get().getMcItem().get());
+
                 //(Vanilla)ItemGroupに追加する処理
-                if (item.getItem().get().getMcItem() != null) {
+                if (item.getItem().get().getSettings().getVanilaItemGroup() != null) {
                     ItemGroupEvents.modifyEntriesEvent(item.getItem().get().getSettings().getVanilaItemGroup().getItemGroupRegistryKey()).register(itemGroup -> {
-                        itemGroup.add(item.getItem().get().getMcItem());
+                        itemGroup.add(item.getItem().get().getMcItem().get());
                     });
                 }
             }
 
             //ItemGroupの登録
+
             for (DhgItemGroup dhgItemGroup : registry.getItemGroups()) {
+
+                for (AddGroupHelper groupHelper : DhgLoader.addGroupHelper) {
+                    groupHelper.tab(groupHelper.getDhgItem().getSettings().getDhgItemGroup());
+                    groupHelper.addTabItem();
+                }
 
                 ItemGroup itemGroup = BuildItemGroup.build(dhgItemGroup);
                 Registry.register(Registries.ITEM_GROUP, dhgItemGroup.getRegistryKey(), itemGroup);
 
                 for (DhgItem dhgItemStack : dhgItemGroup.getDhgItemStacks()) {
-                    ExtendVanilaItem extendVanilaItem = dhgItemStack.getMcItem();
+                    ExtendVanilaItem extendVanilaItem = dhgItemStack.getMcItem().get();
                     dhgItemGroup.appendItems(extendVanilaItem);
                 }
 
+                if (dhgItemGroup.getStacks() != null) {
+                    ItemGroupEvents.modifyEntriesEvent(dhgItemGroup.getRegistryKey()).register(itemGroup1 -> {
+                        itemGroup1.addAll(dhgItemGroup.getStacks());
 
-                ItemGroupEvents.modifyEntriesEvent(dhgItemGroup.getRegistryKey()).register(itemGroup1 -> {
-                    itemGroup1.addAll(dhgItemGroup.getStacks());
-
-                });
+                    });
+                }
             }
         }
     }

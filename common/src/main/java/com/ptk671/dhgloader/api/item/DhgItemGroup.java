@@ -17,8 +17,8 @@ public class DhgItemGroup {
     private final List<ItemStack> stacks2 = new ArrayList<>();
     private final List<DhgItem> dhgItemStack = new ArrayList<>();
     private ItemGroup buildedItemGroup;
-    private DhgItem dhgItemIcon;
-    private ItemStack itemIcon = Items.AIR.getDefaultStack();
+    //private DhgItem dhgItemIcon;
+    private Supplier<ItemStack> itemIcon = Items.AIR::getDefaultStack;
     private RegistryKey<ItemGroup> registryKey;
 
     public DhgItemGroup (DhgIdentifier identifier)  {
@@ -28,12 +28,12 @@ public class DhgItemGroup {
     }
 
     public DhgItemGroup icon(DhgItem item) {
-        this.dhgItemIcon = item;
+        this.itemIcon = () -> new ItemStack(item.getMcItem().get());
         return this;
     }
 
     public DhgItemGroup icon(Item item) {
-        this.itemIcon = new ItemStack(item);
+        this.itemIcon = () -> new ItemStack(item);
         return this;
     }
 
@@ -47,14 +47,8 @@ public class DhgItemGroup {
         return this;
     }
 
-
-
-    public DhgItem getDhgItemIcon() {
-        return dhgItemIcon;
-    }
-
     public Supplier<ItemStack> getItemIcon() {
-        return () -> itemIcon;
+        return () -> itemIcon.get();
     }
 
     public List<ItemStack> getStacks() {

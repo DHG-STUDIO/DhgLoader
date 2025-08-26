@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 public class DhgItem {
     private DhgItemSettings itemSettings;
-    private ExtendVanilaItem mcItem;
+    private Supplier<ExtendVanilaItem> mcItem;
     private DhgIdentifier itemIdentifier;
 
     public DhgItem(DhgIdentifier identifier, DhgItemSettings settings) {
@@ -15,16 +15,16 @@ public class DhgItem {
     }
 
 public void setMcItem(ExtendVanilaItem item){
-        this.mcItem = item;
+        this.mcItem = () -> item;
 }
 
-    public ExtendVanilaItem getMcItem() {
+    public Supplier<ExtendVanilaItem> getMcItem() {
         if(mcItem == null) {
             throw new IllegalArgumentException("マインクラフトのアイテムを取得するのに失敗しました。");
         }
 
 
-        return mcItem;
+        return () -> mcItem.get();
     }
 
     public DhgIdentifier getId(){

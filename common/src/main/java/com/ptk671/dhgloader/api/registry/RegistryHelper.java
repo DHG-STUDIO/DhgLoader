@@ -1,6 +1,7 @@
 package com.ptk671.dhgloader.api.registry;
 
 import com.ptk671.dhgloader.api.item.DhgItem;
+import com.ptk671.dhgloader.api.item.DhgItemGroup;
 import com.ptk671.dhgloader.api.util.DhgIdentifier;
 
 import java.util.function.Supplier;
@@ -11,11 +12,16 @@ public class RegistryHelper {
 
          private final Supplier<DhgItem> item;
          private final DhgIdentifier itemId;
+         private DhgItemGroup dhgItemGroup;
 
          public Item(DhgItem item, DhgIdentifier itemId) {
              this.item = () -> item;
              this.itemId = itemId;
+             if (item.getSettings().getDhgItemGroup() !=null){
+                 this.dhgItemGroup = item.getSettings().getDhgItemGroup();
+             }
          }
+
 
          public DhgIdentifier getItemId() {
              return itemId;
@@ -23,6 +29,11 @@ public class RegistryHelper {
 
          public Supplier<DhgItem> getItem() {
              return item;
+         }
+
+         public DhgItemGroup dhgItemGroup() {
+
+             return dhgItemGroup;
          }
      }
  }
