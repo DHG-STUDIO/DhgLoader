@@ -1,0 +1,74 @@
+package io.github.dhgstudio.dhgloader.api.item;
+
+import io.github.dhgstudio.dhgloader.api.util.DhgIdentifier;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+
+import java.util.List;
+import java.util.function.Supplier;
+
+public class DhgItemGroup {
+  //  private final DhgIdentifier identifier;
+    private ItemGroup buildedItemGroup;
+    //private DhgItem dhgItemIcon;
+    private Supplier<ItemStack> itemIcon = Items.AIR::getDefaultStack;
+    private RegistryKey<ItemGroup> registryKey;
+/*
+    public DhgItemGroup (DhgIdentifier identifier)  {
+        this.identifier = identifier;
+        registryKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(), this.getId().toMinecraft());
+
+    }
+
+   public DhgItemGroup icon(DhgItem item) {
+        this.itemIcon = () -> new ItemStack(item.getMcItem().get());
+        return this;
+    }
+
+    public DhgItemGroup icon(Item item) {
+        this.itemIcon = () -> new ItemStack(item);
+        return this;
+    }
+
+    public DhgItemGroup appendItems(Item item)  {
+        stacks2.add(new ItemStack(item));
+        return this;
+    }
+
+    public DhgItemGroup appendItems(DhgItem item)  {
+        dhgItemStack.add(item);
+        return this;
+    }
+
+    public Supplier<ItemStack> getItemIcon() {
+        return () -> itemIcon.get();
+    }
+
+    public List<ItemStack> getStacks() {
+
+        return stacks2;
+    }
+
+    public DhgIdentifier getId(){
+        return identifier;
+    }
+
+    public void setItemGroup(ItemGroup itemGroup){
+        this.buildedItemGroup = itemGroup;
+    }
+
+    public ItemGroup getItemGroup(){
+
+        return buildedItemGroup;
+    }
+
+    public RegistryKey<ItemGroup> getRegistryKey() {
+
+        return registryKey;
+    }
+*/
+
+}

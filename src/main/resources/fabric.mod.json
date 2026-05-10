@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "dhgloader",
+  "version": "${version}",
+  "name": "Dhg Loader",
+  "description": "DhgLibrary",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/dhgloader/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "io.github.dhgstudio.dhgloader.client.DhgloaderDataGenerator"
+    ],
+    "client": [
+      "io.github.dhgstudio.dhgloader.client.DhgloaderClient"
+    ],
+    "main": [
+      "io.github.dhgstudio.dhgloader.Dhgloader"
+    ]
+  },
+  "mixins": [
+    "dhgloader.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
