@@ -1,17 +1,8 @@
 package com.ptk671.dhgloader.fabric;
 
 import com.ptk671.dhgloader.DhgLoader;
-import com.ptk671.dhgloader.api.item.AddGroupHelper;
-import com.ptk671.dhgloader.api.item.DhgItem;
-import com.ptk671.dhgloader.api.item.DhgItemGroup;
-import com.ptk671.dhgloader.api.item.ExtendVanilaItem;
-import com.ptk671.dhgloader.api.registry.CompatDhgRegistry;
-import com.ptk671.dhgloader.api.registry.RegistryHelper;
+import com.ptk671.dhgloader.fabric.api.registry.Registries;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 
 
 public final class DhgLoaderFabric implements ModInitializer {
@@ -24,8 +15,15 @@ public final class DhgLoaderFabric implements ModInitializer {
         // Proceed with mild caution.
 
         // Run our common setup.
+        Build.init();
+
+        Registries.init();
+
         DhgLoader.init();
 
+
+        //OLD
+/*
         for (CompatDhgRegistry registry : DhgLoader.registries) {
 
 
@@ -69,7 +67,6 @@ public final class DhgLoaderFabric implements ModInitializer {
 
                     });
                 }
-            }
+            }*/
         }
     }
-}

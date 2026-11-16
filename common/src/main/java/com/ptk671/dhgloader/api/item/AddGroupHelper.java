@@ -36,7 +36,7 @@ public class AddGroupHelper {
     public AddGroupHelper addTabItem() {
         DhgItemGroup itemGroup;
         itemGroup = this.dhgItemGroup;
-        itemGroup.appendItems(dhgItem);
+       // itemGroup.appendItems(dhgItem);
         return this;
     }
 

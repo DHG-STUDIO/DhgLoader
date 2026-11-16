@@ -1,6 +1,5 @@
 package com.ptk671.dhgloader.api.registry;
 
-import com.ptk671.dhgloader.BuildItem;
 import com.ptk671.dhgloader.api.item.DhgItem;
 import com.ptk671.dhgloader.api.item.DhgItemGroup;
 
@@ -13,7 +12,7 @@ public class CompatDhgRegistry {
     private RegistryHelper items;
     public void registryItem(DhgItem item) {
 
-        BuildItem.build(item);
+       // BuildItem.build(item);
 
         if(item == null) {
             return;

@@ -4,7 +4,7 @@ import com.ptk671.dhgloader.api.item.DhgItem;
 import com.ptk671.dhgloader.api.item.ExtendVanilaItem;
 import net.minecraft.item.Item;
 
-public class BuildItemImpl {
+public class BuildItem {
     public static ExtendVanilaItem build(DhgItem item){
 
         Item.Settings settings = new Item.Settings();

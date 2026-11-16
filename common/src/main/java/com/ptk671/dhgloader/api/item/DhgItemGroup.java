@@ -10,16 +10,17 @@ import net.minecraft.registry.RegistryKey;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Supplier;
 
 public class DhgItemGroup {
     private final DhgIdentifier identifier;
-    private final List<ItemStack> stacks2 = new ArrayList<>();
-    private final List<DhgItem> dhgItemStack = new ArrayList<>();
     private ItemGroup buildedItemGroup;
     //private DhgItem dhgItemIcon;
     private Supplier<ItemStack> itemIcon = Items.AIR::getDefaultStack;
-    private RegistryKey<ItemGroup> registryKey;
+    private final RegistryKey<ItemGroup> registryKey;
+
 
     public DhgItemGroup (DhgIdentifier identifier)  {
         this.identifier = identifier;
@@ -37,7 +38,19 @@ public class DhgItemGroup {
         return this;
     }
 
-    public DhgItemGroup appendItems(Item item)  {
+    public DhgItemGroup appendItem(DhgItem item){
+
+
+        return this;
+    }
+
+    public DhgItemGroup appendItem(ExtendVanilaItem item){
+
+
+        return this;
+    }
+
+ /*   public DhgItemGroup appendItems(Item item)  {
         stacks2.add(new ItemStack(item));
         return this;
     }
@@ -46,16 +59,16 @@ public class DhgItemGroup {
         dhgItemStack.add(item);
         return this;
     }
-
+*/
     public Supplier<ItemStack> getItemIcon() {
         return () -> itemIcon.get();
     }
 
-    public List<ItemStack> getStacks() {
+   /* public List<ItemStack> getStacks() {
 
-        return stacks2;
+        return itemStack;
     }
-
+*/
     public DhgIdentifier getId(){
         return identifier;
     }
@@ -74,8 +87,8 @@ public class DhgItemGroup {
         return registryKey;
     }
 
-    public List<DhgItem> getDhgItemStacks(){
+  /*  public List<DhgItem> getDhgItemStacks(){
 
         return dhgItemStack;
-    }
+    }*/
 }
